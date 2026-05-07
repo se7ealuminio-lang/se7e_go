@@ -71,10 +71,13 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
         // Tiramos a sombra e as margens na hora de imprimir
         className="my-12 w-full max-w-[210mm] bg-white text-black shadow-2xl print:my-0 print:max-w-none print:shadow-none"
         style={{
-          fontFamily: "Arial, sans-serif",
+          fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           fontSize: "10pt",
           color: "#333",
           padding: "10mm 12mm",
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+          textRendering: "optimizeLegibility",
         }}
       >
         {/* Header */}
