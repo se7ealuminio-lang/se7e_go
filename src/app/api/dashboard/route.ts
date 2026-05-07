@@ -26,12 +26,34 @@ export async function GET() {
       .filter((q: typeof quotes.$inferSelect) => {
         const qDate = new Date(q.date || "");
         return (
-          (q.status === "aprovado" || q.status === "concluido") &&
+          (q.status === "aprovado" || q.status === "concluido" || q.status === "concluído") &&
           qDate.getMonth() === currentMonth &&
           qDate.getFullYear() === currentYear
         );
       })
       .reduce((sum: number, q: typeof quotes.$inferSelect) => sum + (q.total || 0), 0);
+
+    // Mês passado
+    const lastMonthDate = new Date();
+    lastMonthDate.setDate(1);
+    lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
+    const lastMonth = lastMonthDate.getMonth();
+    const lastMonthYear = lastMonthDate.getFullYear();
+
+    const lastMonthRevenue = allQuotes
+      .filter((q: typeof quotes.$inferSelect) => {
+        const qDate = new Date(q.date || "");
+        return (
+          (q.status === "aprovado" || q.status === "concluido" || q.status === "concluído") &&
+          qDate.getMonth() === lastMonth &&
+          qDate.getFullYear() === lastMonthYear
+        );
+      })
+      .reduce((sum: number, q: typeof quotes.$inferSelect) => sum + (q.total || 0), 0);
+
+    const revenueGrowth = lastMonthRevenue > 0 
+      ? ((monthlyRevenue - lastMonthRevenue) / lastMonthRevenue) * 100 
+      : (monthlyRevenue > 0 ? 100 : 0);
 
     const pendingCount = allQuotes.filter(
       (q: typeof quotes.$inferSelect) => q.status === "rascunho" || q.status === "enviado"
@@ -86,6 +108,7 @@ export async function GET() {
     return NextResponse.json({
       metrics: {
         monthlyRevenue,
+        revenueGrowth,
         pendingCount,
         draftCount,
         sentCount,

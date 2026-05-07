@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Versailles - Gerador de Orçamentos",
-    short_name: "Versailles",
+    name: "SE7E Alumínio & Vidros - Gerador de Orçamentos",
+    short_name: "SE7E",
     description:
       "Sistema de geração de orçamentos profissionais para vidraçaria",
     start_url: "/",

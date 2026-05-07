@@ -5,13 +5,13 @@ import "./globals.css";
 
 // Cormorant Garamond - editorial serif for premium branding
 export const viewport = {
-  themeColor: "#080808",
+  themeColor: "#0A0A0A",
 };
 
 export const metadata: Metadata = {
-  title: "Versailles - Gerador de Orçamentos",
+  title: "SE7E - Gerador de Orçamentos",
   description:
-    "Sistema de geração de orçamentos profissionais para a Vidraçaria Versailles. Crie, edite e exporte orçamentos em PDF.",
+    "Sistema de geração de orçamentos profissionais para a SE7E Alumínio & Vidros. Crie, edite e exporte orçamentos em PDF com design premium.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -25,15 +25,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        />
+        {/* Usando fonte Geist padrão do Next.js App Router (já configurada no globals.css) */}
       </head>
-      <body className="noise-overlay min-h-screen">
-        <ThemeProvider>
+      <body className="noise-overlay min-h-screen bg-background text-foreground antialiased selection:bg-primary/30">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
           <Toaster
             position="top-right"

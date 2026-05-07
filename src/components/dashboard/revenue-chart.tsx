@@ -26,7 +26,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: `${Math.max(heightPercentage, 2)}%`, opacity: 1 }}
                 transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
-                className="absolute bottom-0 w-full rounded-t-md bg-gradient-to-t from-primary/30 to-primary/90 shadow-[0_0_15px_var(--color-primary)]"
+                className="absolute bottom-0 w-full rounded-t-sm bg-gradient-to-t from-primary/10 via-primary/40 to-primary/80 shadow-[0_0_20px_rgba(33,94,154,0.3)] border-t border-primary/50"
               />
             </div>
             <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">

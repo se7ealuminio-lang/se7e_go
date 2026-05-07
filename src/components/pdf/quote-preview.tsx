@@ -90,7 +90,7 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", minWidth: "200px" }}>
-            <img src="/logo.png" alt="Logo" style={{ width: "70px", height: "70px", borderRadius: "50%", objectFit: "cover", marginBottom: "8px" }} crossOrigin="anonymous" />
+            <img src="/se7e-logo-v2.png" alt="Logo" style={{ width: "80px", height: "auto", objectFit: "contain", marginBottom: "8px" }} />
             <h2 style={{ fontSize: "14pt", margin: "0", textAlign: "right" }}>ORÇAMENTO {quote.quote_number}</h2>
             <p style={{ fontSize: "11pt", marginTop: "3px", textAlign: "right" }}>{formatDate(quote.date)}</p>
           </div>
@@ -105,7 +105,12 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
 
         <h2 style={{ textTransform: "uppercase", fontSize: "14pt", fontWeight: "bold", marginBottom: "15px" }}>PRODUTOS</h2>
 
-        {quote.items.map((item, index) => (
+        {quote.items.map((item, index) => {
+          const imageUrl = item.image_url && item.image_url.includes(".blob.vercel-storage.com")
+            ? `/api/images/proxy?url=${encodeURIComponent(item.image_url)}`
+            : item.image_url;
+
+          return (
           <div
             key={index}
             // A mágica acontece aqui: break-inside-avoid nativo do CSS
@@ -116,9 +121,9 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
             }}
           >
             <div style={{ display: "flex", alignItems: "flex-start", gap: "20px", paddingBottom: "15px", borderBottom: "1px solid #ccc" }}>
-              {item.image_url && (
-                <div style={{ flexBasis: "120px", flexShrink: 0 }}>
-                  <img src={item.image_url} alt={item.title} style={{ width: "120px", height: "120px", objectFit: "contain", border: "1px solid #eee" }} crossOrigin="anonymous" />
+              {imageUrl && (
+                <div style={{ flexBasis: "120px", flexShrink: 0, overflow: "hidden" }}>
+                  <img src={imageUrl} alt={item.title} style={{ width: "120px", height: "120px", objectFit: "contain", border: "1px solid #eee" }} />
                 </div>
               )}
               <div style={{ flex: 1, display: "flex", justifyContent: "space-between" }}>
@@ -139,7 +144,8 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
 
         {/* Footer */}
         <div 

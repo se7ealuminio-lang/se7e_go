@@ -3,7 +3,7 @@
  * Usa SHA-256 via Web Crypto API (compatível com Edge e Node).
  */
 
-const AUTH_SALT = "versailles-orcamentos-2024";
+const AUTH_SALT = "se7e-orcamentos-2025";
 
 /**
  * Gera um hash SHA-256 da senha + salt.

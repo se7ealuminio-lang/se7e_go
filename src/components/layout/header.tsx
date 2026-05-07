@@ -35,12 +35,12 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img
-            src="/logo.png"
-            alt="Logo Versailles Vidraçaria"
+            src="/se7e-logo-v2.png"
+            alt="Logo SE7E Alumínio & Vidros"
             className="h-8 w-8 rounded-full object-cover transition-transform group-hover:scale-110"
           />
-          <span className="text-lg font-bold tracking-tight text-foreground">
-            Versailles
+          <span className="text-lg font-bold tracking-tighter text-foreground uppercase">
+            SE7E
           </span>
         </Link>
 
