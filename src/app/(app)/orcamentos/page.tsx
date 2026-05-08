@@ -366,7 +366,8 @@ export default function QuotesListPage() {
                           className="h-8 w-8 text-muted-foreground hover:text-green-600"
                           onClick={() => {
                             const phone = quote.clientPhone ? quote.clientPhone.replace(/\D/g, "") : "";
-                            const msg = encodeURIComponent(`Olá, ${quote.clientName}! Tudo bem?\n\nConforme conversamos, segue em anexo o orçamento detalhado (PDF) referente ao seu projeto. Fico à disposição para esclarecer qualquer dúvida!`);
+                            const firstName = quote.clientName.split(" ")[0];
+                            const msg = encodeURIComponent(`Olá, ${firstName}! Tudo bem?\n\nConforme conversamos, segue em anexo o orçamento detalhado (PDF) referente ao seu projeto. Fico à disposição para esclarecer qualquer dúvida!`);
                             window.open(`https://wa.me/55${phone}?text=${msg}`, "_blank");
                           }}
                           title="Enviar por WhatsApp"
