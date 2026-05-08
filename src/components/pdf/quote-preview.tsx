@@ -49,6 +49,7 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
       data-pdf-modal
       // Classes print: resolvem o layout para a folha A4 nativamente
       className="fixed inset-0 z-50 overflow-auto bg-black/70 p-2 sm:p-4 backdrop-blur-sm print:static print:block print:h-auto print:w-auto print:overflow-visible print:bg-white print:p-0 print:backdrop-blur-none"
+      style={{ minWidth: "fit-content" }}
       onClick={onClose}
     >
       {/* Toolbar - Escondida na hora da impressão com print:hidden */}
@@ -69,7 +70,7 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
         data-pdf-content
         onClick={(e) => e.stopPropagation()}
         // Tiramos a sombra e as margens na hora de imprimir
-        className="mx-auto mb-12 mt-4 w-[210mm] bg-white text-black shadow-2xl print:m-0 print:w-[210mm] print:shadow-none"
+        className="mx-auto mt-16 mb-12 w-[210mm] bg-white text-black shadow-2xl print:!m-0 print:!mt-0 print:!mb-0 print:w-full print:max-w-none print:shadow-none"
         style={{
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           fontSize: "10pt",
@@ -186,12 +187,12 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
             </div>
           )}
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "40px" }}>
-            <div style={{ textAlign: "center", width: "300px", borderTop: "1px solid #000", paddingTop: "5px" }}>
-              <p style={{ fontWeight: "bold", textTransform: "uppercase", margin: 0 }}>{client.name.toUpperCase()}</p>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "40px", gap: "40px" }}>
+            <div style={{ textAlign: "center", flex: 1, borderTop: "1px solid #000", paddingTop: "5px" }}>
+              <p style={{ fontWeight: "bold", textTransform: "uppercase", margin: 0, fontSize: "10pt" }}>{client.name.toUpperCase()}</p>
             </div>
-            <div style={{ textAlign: "center", width: "300px", borderTop: "1px solid #000", paddingTop: "5px" }}>
-              <p style={{ fontWeight: "bold", textTransform: "uppercase", margin: 0 }}>{companyData.name.toUpperCase()}</p>
+            <div style={{ textAlign: "center", flex: 1, borderTop: "1px solid #000", paddingTop: "5px" }}>
+              <p style={{ fontWeight: "bold", textTransform: "uppercase", margin: 0, fontSize: "10pt" }}>{companyData.name.toUpperCase()}</p>
             </div>
           </div>
         </div>

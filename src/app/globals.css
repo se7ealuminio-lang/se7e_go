@@ -157,6 +157,41 @@
   .no-print {
     display: none !important;
   }
+
+  /* Reset everything to prevent blank second page */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide the sticky total bar and header during print */
+  [data-pdf-modal] ~ div,
+  header,
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  /* Ensure the PDF content fills the page without extra space */
+  [data-pdf-content] {
+    margin: 0 !important;
+    padding: 10mm 12mm !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove page margins to maximize space */
+  @page {
+    margin: 0;
+    size: A4;
+  }
 }
 
 /* Smooth scrolling */

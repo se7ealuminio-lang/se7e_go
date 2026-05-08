@@ -294,7 +294,7 @@ function QuoteFormContent() {
   }
 
   return (
-    <div className="space-y-6 pb-28">
+    <div className="space-y-6 pb-4">
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -663,7 +663,7 @@ function QuoteFormContent() {
       </form>
 
       {/* Sticky Total Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-primary/15 bg-card/95 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+      <div className="sticky bottom-0 z-40 -mx-4 border-t border-primary/15 bg-card/95 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] sm:-mx-6">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-4">
             <div>
