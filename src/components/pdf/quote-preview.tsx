@@ -48,7 +48,7 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
     <div
       data-pdf-modal
       // Classes print: resolvem o layout para a folha A4 nativamente
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-4 backdrop-blur-sm print:absolute print:inset-0 print:block print:h-auto print:overflow-visible print:bg-transparent print:p-0 print:backdrop-blur-none"
+      className="fixed inset-0 z-50 overflow-auto bg-black/70 p-2 sm:p-4 backdrop-blur-sm print:static print:block print:h-auto print:w-auto print:overflow-visible print:bg-white print:p-0 print:backdrop-blur-none"
       onClick={onClose}
     >
       {/* Toolbar - Escondida na hora da impressão com print:hidden */}
@@ -69,7 +69,7 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
         data-pdf-content
         onClick={(e) => e.stopPropagation()}
         // Tiramos a sombra e as margens na hora de imprimir
-        className="my-12 w-full max-w-[210mm] bg-white text-black shadow-2xl print:my-0 print:max-w-none print:shadow-none"
+        className="mx-auto mb-12 mt-4 w-[210mm] bg-white text-black shadow-2xl print:m-0 print:w-[210mm] print:shadow-none"
         style={{
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           fontSize: "10pt",
