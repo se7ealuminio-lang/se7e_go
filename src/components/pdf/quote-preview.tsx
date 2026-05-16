@@ -50,11 +50,12 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
     // Solução: separar toolbar (flex-shrink-0) do conteúdo scrollável (flex-1).
     <div
       data-pdf-modal
-      className="fixed inset-0 z-50 flex flex-col bg-black/70 backdrop-blur-sm print:static print:block print:h-auto print:w-auto print:overflow-visible print:bg-white print:p-0 print:backdrop-blur-none"
+      className="fixed inset-0 z-50 flex flex-col bg-black/70 backdrop-blur-sm"
     >
       {/* Toolbar - FORA do scroll, sempre visível no topo */}
       <div
-        className="flex flex-shrink-0 items-center justify-end gap-2 p-3 print:hidden"
+        data-pdf-toolbar
+        className="flex flex-shrink-0 items-center justify-end gap-2 p-3"
         onClick={(e) => e.stopPropagation()}
       >
         <Button onClick={handlePrint} className="gap-2 font-semibold shadow-lg">
@@ -68,13 +69,14 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
 
       {/* Área scrollável - independente da toolbar */}
       <div
-        className="flex-1 overflow-auto print:overflow-visible"
+        data-pdf-scroll
+        className="flex-1 overflow-auto"
         onClick={onClose}
       >
         <div
           data-pdf-content
           onClick={(e) => e.stopPropagation()}
-          className="mx-auto mb-8 w-[210mm] bg-white text-black shadow-2xl print:!m-0 print:w-full print:max-w-none print:shadow-none"
+          className="mx-auto mb-8 w-[210mm] bg-white text-black shadow-2xl"
           style={{
             fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
             fontSize: "10pt",
@@ -121,11 +123,11 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
             return (
             <div
               key={index}
-              // A mágica acontece aqui: break-inside-avoid nativo do CSS
-              className="print:break-inside-avoid mb-6"
+              data-pdf-item
               style={{
                 pageBreakInside: "avoid",
                 breakInside: "avoid",
+                marginBottom: "24px",
               }}
             >
               <div style={{ display: "flex", alignItems: "flex-start", gap: "20px", paddingBottom: "15px", borderBottom: "1px solid #ccc" }}>
@@ -146,8 +148,14 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
                     </div>
                   </div>
                   <div style={{ textAlign: "right", fontSize: "10pt", minWidth: "180px" }}>
-                    {item.unit_price > 0 && <p style={{ margin: "3px 0" }}>VALOR UNITÁRIO: R$ {formatCurrencyValue(item.unit_price)}</p>}
-                    <p style={{ margin: "3px 0" }}><strong>VALOR TOTAL: R$ {formatCurrencyValue(item.total_price)}</strong></p>
+                    {item.unit_price > 0 && (
+                      <p data-pdf-currency style={{ margin: "3px 0", whiteSpace: "nowrap" }}>
+                        VALOR UNITÁRIO: R$ {formatCurrencyValue(item.unit_price)}
+                      </p>
+                    )}
+                    <p data-pdf-currency style={{ margin: "3px 0", whiteSpace: "nowrap" }}>
+                      <strong>VALOR TOTAL: R$ {formatCurrencyValue(item.total_price)}</strong>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -157,10 +165,11 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
 
           {/* Footer */}
           <div 
-            className="print:break-inside-avoid mt-6"
+            data-pdf-footer
             style={{ 
               pageBreakInside: "avoid", 
-              breakInside: "avoid" 
+              breakInside: "avoid",
+              marginTop: "24px",
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", paddingTop: "10px", borderTop: "2px solid #000" }}>
@@ -171,12 +180,12 @@ export function QuotePreview({ client, quote, onClose }: QuotePreviewProps) {
               </div>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
                 {(quote.discount ?? 0) > 0 && (
-                  <div style={{ padding: "0 15px", marginBottom: "5px", display: "flex", alignItems: "center", gap: "10px", color: "red" }}>
+                  <div data-pdf-currency style={{ padding: "0 15px", marginBottom: "5px", display: "flex", alignItems: "center", gap: "10px", color: "red", whiteSpace: "nowrap" }}>
                     <span style={{ fontSize: "11pt" }}>DESCONTO:</span>
                     <span style={{ fontSize: "12pt" }}>- R$ {formatCurrencyValue(quote.discount!)}</span>
                   </div>
                 )}
-                <div style={{ border: "2px solid #000", padding: "12px 15px", borderRadius: "5px", display: "flex", alignItems: "center", gap: "10px" }}>
+                <div data-pdf-currency style={{ border: "2px solid #000", padding: "12px 15px", borderRadius: "5px", display: "flex", alignItems: "center", gap: "10px", whiteSpace: "nowrap" }}>
                   <span style={{ fontSize: "14pt", fontWeight: "bold" }}>TOTAL:</span>
                   <span style={{ fontSize: "15pt", fontWeight: "bold" }}>R$ {formatCurrencyValue(quote.total)}</span>
                 </div>
